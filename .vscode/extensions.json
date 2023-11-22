@@ -1,0 +1,21 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint", // ESLint
+    "ryu1kn.annotator", // Annotator / Blame
+    "ms-vscode.atom-keybindings", // Atom Keymap
+    "shakram02.bash-beautify", // Bash Beautify
+    "ryanluker.vscode-coverage-gutters", // Coverage Gutters (Code coverage for tests)
+    "editorconfig.editorconfig", // EditorConfig for VS Code
+    "github.vscode-pull-request-github", // GitHub Pull Requests and Issues
+    "eamodio.gitlens", // GitLens — Git supercharged
+    "xabikos.javascriptsnippets", // JavaScript (ES6) code snippets
+    "ms-vscode.vscode-typescript-next", // JavaScript and TypeScript Nightly
+    "shd101wyy.markdown-preview-enhanced", // Markdown Preview Enhanced
+    "christian-kohler.npm-intellisense", // npm Intellisense (autocompletes npm modules in import statements)
+    "christian-kohler.path-intellisense", // Path Intellisense (autocompletes filenames)
+    "robertoachar.vscode-essentials-snippets", // VSCode Essentials Snippets
+    "codeandstuff.package-json-upgrade", // Package Json Upgrade
+    "mikestead.dotenv", // DotENV (syntax highlighting for .env files)
+    "redhat.vscode-yaml" // YAML (Validation, auto completion, formatter, ...)
+  ]
+}
