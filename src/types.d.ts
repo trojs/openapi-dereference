@@ -25,3 +25,5 @@ type DeepOmit<T, K> = T extends Primitive
         : DeepOmit<TP, K>
         : never;
     };
+
+export const dereferenceSync: (schema: JSONSchema) => DereferencedJSONSchema
