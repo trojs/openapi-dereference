@@ -1,0 +1,66 @@
+{
+    "name": "@hckrnews/openapi-dereference",
+    "description": "OpenAPI dereference",
+    "version": "0.1.0",
+    "author": {
+        "name": "Pieter Wigboldus",
+        "url": "https://hckr.news/"
+    },
+    "license": "LGPL-3.0",
+    "scripts": {
+        "lint": "eslint src/*.js --config .eslintrc",
+        "lint:report": "eslint src/*.js --config .eslintrc -f json -o report.json",
+        "lint:fix": "eslint src/*.js --config .eslintrc --fix",
+        "lint:rules": "eslint --print-config file.js > eslintconfig.json",
+        "test": "c8 node --test src/*.test.js",
+        "test:watch": "c8 node --watch --test src/*.test.js",
+        "cpd": "node_modules/jscpd/bin/jscpd src",
+        "vulnerabilities": "npm audit --omit=dev"
+    },
+    "type": "module",
+    "files": [
+        "src/dereference.js",
+        "src/index.js",
+        "src/klona.js",
+        "src/resolveRef.js",
+        "src/types.d.ts"
+    ],
+    "main": "src/index.js",
+    "types": "src/types.d.ts",
+    "devDependencies": {
+        "@hckrnews/eslint-config": "^3.0.0",
+        "c8": "^8.0.0",
+        "eslint": "^8.23.0",
+        "eslint-config-standard": "^17.1.0",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-jsdoc": "^46.0.0",
+        "eslint-plugin-n": "^16.0.0",
+        "eslint-plugin-promise": "^6.0.1",
+        "eslint-plugin-sonarjs": "^0.23.0",
+        "jscpd": "^3.2.1",
+        "json-schema": "^0.4.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hckrnews/openapi-dereference"
+    },
+    "engines": {
+        "node": ">= 18.13"
+    },
+    "keywords": [
+        "openapi",
+        "model",
+        "entity",
+        "schema",
+        "specification",
+        "api",
+        "ajv",
+        "dereference",
+        "reference",
+        "ref"
+    ],
+    "funding": {
+        "type": "github",
+        "url": "https://github.com/sponsors/w3nl"
+    }
+}
