@@ -29,7 +29,7 @@ npm i @hckrnews/openapi-dereference
 ```
 
 ```javascript
-import { dereferenceSync } from 'dereference-json-schema';
+import { dereferenceSync } from '@hckrnews/openapi-dereference';
 
 const schemaWithRefs = {
   schemas: {
@@ -48,7 +48,7 @@ const schemaWithRefs = {
 };
 
 const schemaWithNoRefs = dereferenceSync(schemaWithRefs);
-
+```
 
 [npm-url]: https://www.npmjs.com/package/@hckrnews/openapi-dereference
 [npm-image]: https://img.shields.io/npm/v/@hckrnews/openapi-dereference.svg
