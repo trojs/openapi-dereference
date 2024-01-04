@@ -26,7 +26,7 @@
   "npm.enableTouchbar": true,
   "lcov.path": "coverage/lcov.info",
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": "explicit"
   },
   "[javascript]": {
     "editor.formatOnSave": true,
