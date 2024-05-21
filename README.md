@@ -10,9 +10,9 @@ Zero dependencies. Synchronous core. Handles circular refs.
 
 ## Installation
 
-`npm install @hckrnews/openapi-dereference`
+`npm install @trojs/openapi-dereference`
 or
-`yarn add @hckrnews/openapi-dereference`
+`yarn add @trojs/openapi-dereference`
 
 ## Test the package
 
@@ -24,12 +24,12 @@ or
 
 
 ```javascript
-npm i @hckrnews/openapi-dereference
+npm i @trojs/openapi-dereference
 
 ```
 
 ```javascript
-import { dereferenceSync } from '@hckrnews/openapi-dereference';
+import { dereferenceSync } from '@trojs/openapi-dereference';
 
 const schemaWithRefs = {
   schemas: {
@@ -50,5 +50,5 @@ const schemaWithRefs = {
 const schemaWithNoRefs = dereferenceSync(schemaWithRefs);
 ```
 
-[npm-url]: https://www.npmjs.com/package/@hckrnews/openapi-dereference
-[npm-image]: https://img.shields.io/npm/v/@hckrnews/openapi-dereference.svg
+[npm-url]: https://www.npmjs.com/package/@trojs/openapi-dereference
+[npm-image]: https://img.shields.io/npm/v/@trojs/openapi-dereference.svg
