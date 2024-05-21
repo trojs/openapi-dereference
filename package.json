@@ -1,10 +1,10 @@
 {
-    "name": "@hckrnews/openapi-dereference",
+    "name": "@trojs/openapi-dereference",
     "description": "OpenAPI dereference",
-    "version": "0.1.5",
+    "version": "0.2.0",
     "author": {
         "name": "Pieter Wigboldus",
-        "url": "https://hckr.news/"
+        "url": "https://trojs.org/"
     },
     "license": "MIT",
     "scripts": {
