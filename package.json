@@ -1,7 +1,7 @@
 {
     "name": "@trojs/openapi-dereference",
     "description": "OpenAPI dereference",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://trojs.org/"
@@ -37,12 +37,12 @@
         "eslint-plugin-n": "^16.0.0",
         "eslint-plugin-promise": "^6.0.1",
         "eslint-plugin-sonarjs": "^0.24.0",
-        "jscpd": "^3.2.1",
+        "jscpd": "^4.0.0",
         "json-schema": "^0.4.0"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/hckrnews/openapi-dereference"
+        "url": "https://github.com/trojs/openapi-dereference"
     },
     "engines": {
         "node": ">= 18.13"
