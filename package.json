@@ -35,7 +35,7 @@
         "eslint-plugin-import": "^2.26.0",
         "eslint-plugin-jsdoc": "^48.0.0",
         "eslint-plugin-n": "^16.0.0",
-        "eslint-plugin-promise": "^6.0.1",
+        "eslint-plugin-promise": "^6.6.0",
         "eslint-plugin-sonarjs": "^0.25.0",
         "jscpd": "^4.0.0",
         "json-schema": "^0.4.0"
