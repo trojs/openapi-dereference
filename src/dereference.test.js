@@ -91,9 +91,15 @@ test('dereferenceSync', async (t) => {
           }
         },
         FirstName: {
-          type: 'string'
+          $ref: '#/schemas/NameComponent'
         },
         LastName: {
+          $ref: '#/schemas/NameComponent'
+        },
+        NameComponent: {
+          $ref: '#/schemas/StringType'
+        },
+        StringType: {
           type: 'string'
         }
       }
@@ -135,6 +141,12 @@ test('dereferenceSync', async (t) => {
           type: 'string'
         },
         LastName: {
+          type: 'string'
+        },
+        NameComponent: {
+          type: 'string'
+        },
+        StringType: {
           type: 'string'
         }
       }
