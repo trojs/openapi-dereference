@@ -40,7 +40,11 @@ export const dereferenceSync = (schema) => {
       } else {
         // object
         if ('$ref' in current && typeof current.$ref === 'string') {
-          return resolveRefSync(cloned, current.$ref)
+          let ref = current
+          do {
+            ref = resolveRefSync(cloned, ref.$ref)
+          } while (ref?.$ref)
+          return ref
         }
 
         for (const key in current) {
