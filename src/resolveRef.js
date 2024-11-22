@@ -12,26 +12,26 @@ const cache = new Map()
  * @returns {unknown}
  */
 export const resolveRefSync = (schema, ref) => {
-  if (!cache.has(schema)) {
-    cache.set(schema, new Map())
-  }
-  const schemaCache = cache.get(schema)
-
-  if (schemaCache.has(ref)) {
-    return schemaCache.get(ref)
-  }
-
-  const path = ref.split('/').slice(1)
-
-  let current = schema
-  for (const segment of path) {
-    if (!current || typeof current !== 'object') {
-      // we've reached a dead end
-      current = null
+    if (!cache.has(schema)) {
+        cache.set(schema, new Map())
     }
-    current = current[segment] ?? null
-  }
+    const schemaCache = cache.get(schema)
 
-  schemaCache.set(ref, current)
-  return current
+    if (schemaCache.has(ref)) {
+        return schemaCache.get(ref)
+    }
+
+    const path = ref.split('/').slice(1)
+
+    let current = schema
+    for (const segment of path) {
+        if (!current || typeof current !== 'object') {
+            // we've reached a dead end
+            current = null
+        }
+        current = current[segment] ?? null
+    }
+
+    schemaCache.set(ref, current)
+    return current
 }

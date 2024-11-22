@@ -17,46 +17,46 @@ const cache = new Map()
  * @returns {DereferencedJSONSchema}
  */
 export const dereferenceSync = (schema) => {
-  if (cache.has(schema)) {
-    return cache.get(schema)
-  }
-
-  const visitedNodes = new Set()
-  const cloned = klona(schema)
-
-  const resolve = (current, path) => {
-    if (typeof current === 'object' && current !== null) {
-      // make sure we don't visit the same node twice
-      if (visitedNodes.has(current)) {
-        return current
-      }
-      visitedNodes.add(current)
-
-      if (Array.isArray(current)) {
-        // array
-        for (let index = 0; index < current.length; index++) {
-          current[index] = resolve(current[index], `${path}/${index}`)
-        }
-      } else {
-        // object
-        if ('$ref' in current && typeof current.$ref === 'string') {
-          let ref = current
-          do {
-            ref = resolveRefSync(cloned, ref.$ref)
-          } while (ref?.$ref)
-          return ref
-        }
-
-        for (const key in current) {
-          current[key] = resolve(current[key], `${path}/${key}`)
-        }
-      }
+    if (cache.has(schema)) {
+        return cache.get(schema)
     }
 
-    return current
-  }
+    const visitedNodes = new Set()
+    const cloned = klona(schema)
 
-  const result = resolve(cloned, '#')
-  cache.set(schema, result)
-  return result
+    const resolve = (current, path) => {
+        if (typeof current === 'object' && current !== null) {
+            // make sure we don't visit the same node twice
+            if (visitedNodes.has(current)) {
+                return current
+            }
+            visitedNodes.add(current)
+
+            if (Array.isArray(current)) {
+                // array
+                for (let index = 0; index < current.length; index++) {
+                    current[index] = resolve(current[index], `${path}/${index}`)
+                }
+            } else {
+                // object
+                if ('$ref' in current && typeof current.$ref === 'string') {
+                    let ref = current
+                    do {
+                        ref = resolveRefSync(cloned, ref.$ref)
+                    } while (ref?.$ref)
+                    return ref
+                }
+
+                for (const key in current) {
+                    current[key] = resolve(current[key], `${path}/${key}`)
+                }
+            }
+        }
+
+        return current
+    }
+
+    const result = resolve(cloned, '#')
+    cache.set(schema, result)
+    return result
 }
