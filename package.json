@@ -1,7 +1,7 @@
 {
     "name": "@trojs/openapi-dereference",
     "description": "OpenAPI dereference",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://trojs.org/"
@@ -66,14 +66,5 @@
     "funding": {
         "type": "github",
         "url": "https://github.com/sponsors/w3nl"
-    },
-    "overrides": {
-        "eslint-plugin-sonarjs": {
-            "eslint": "^9.15.0",
-            "@typescript-eslint/eslint-plugin": "^8.0.0",
-            "@typescript-eslint/utils": "^8.0.0",
-            "eslint-plugin-import": "^2.31.0",
-            "eslint-plugin-react-hooks": "^5.0.0"
-        }
     }
 }
