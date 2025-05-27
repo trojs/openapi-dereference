@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
-      - run: npm ci --production
+      - run: npm ci
       - name: Set version from tag
         run: |
           git config user.name "github-actions[bot]"
