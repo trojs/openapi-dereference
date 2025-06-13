@@ -1,7 +1,7 @@
 {
     "name": "@trojs/openapi-dereference",
     "description": "OpenAPI dereference",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://trojs.org/"
