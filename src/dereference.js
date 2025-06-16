@@ -48,7 +48,9 @@ export const dereferenceSync = (schema) => {
         }
 
         for (const key in current) {
-          current[key] = resolve(current[key], `${path}/${key}`)
+          if (!["__proto__", "constructor", "prototype"].includes(key)) {
+            current[key] = resolve(current[key], `${path}/${key}`)
+          }
         }
       }
     }
