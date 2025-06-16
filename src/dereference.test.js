@@ -269,4 +269,111 @@ test('dereferenceSync', async (t) => {
 
     assert.deepEqual(result1, result2)
   })
+
+  await t.test('should dereference arrays containing $ref', async () => {
+    const schema = {
+      schemas: {
+        People: [
+          { $ref: '#/schemas/Person' },
+          { $ref: '#/schemas/Person' }
+        ],
+        Person: {
+          type: 'object',
+          properties: {
+            name: { type: 'string' }
+          }
+        }
+      }
+    }
+    const result = dereferenceSync(schema)
+    assert.deepEqual(result, {
+      schemas: {
+        People: [
+          {
+            type: 'object',
+            properties: { name: { type: 'string' } }
+          },
+          {
+            type: 'object',
+            properties: { name: { type: 'string' } }
+          }
+        ],
+        Person: {
+          type: 'object',
+          properties: { name: { type: 'string' } }
+        }
+      }
+    })
+  })
+
+  await t.test('should ignore prohibited keys', async () => {
+    const schema = {
+      safe: {
+        type: 'object',
+        properties: {
+          valid: { type: 'string' }
+        }
+      },
+      __proto__: { evil: true },
+      constructor: { evil: true },
+      prototype: { evil: true }
+    }
+    const result = dereferenceSync(schema)
+    assert.deepEqual(result, {
+      safe: {
+        type: 'object',
+        properties: {
+          valid: { type: 'string' }
+        }
+      }
+    })
+  })
+
+  await t.test('should handle primitive values', async () => {
+    assert.strictEqual(dereferenceSync('string'), 'string')
+    assert.strictEqual(dereferenceSync(42), 42)
+    assert.strictEqual(dereferenceSync(null), null)
+    assert.strictEqual(dereferenceSync(true), true)
+  })
+
+  await t.test('should dereference $ref pointing to an array', async () => {
+    const schema = {
+      root: { $ref: '#/arr' },
+      arr: [{ type: 'string' }, { type: 'number' }]
+    }
+    const result = dereferenceSync(schema)
+    assert.deepEqual(result, {
+      root: [
+        { type: 'string' },
+        { type: 'number' }
+      ],
+      arr: [
+        { type: 'string' },
+        { type: 'number' }
+      ]
+    })
+  })
+
+  await t.test('should return null for $ref pointing to non-existent path', async () => {
+    const schema = {
+      foo: { $ref: '#/doesNotExist' }
+    }
+    const result = dereferenceSync(schema)
+    assert.deepEqual(result, { foo: null })
+  })
+
+  await t.test('should dereference $ref at the root', async () => {
+    const schema = {
+      $ref: '#/actual',
+      actual: {
+        type: 'object',
+        properties: { foo: { type: 'string' } }
+      }
+    }
+    const result = dereferenceSync(schema)
+    assert.deepEqual(result, {
+      type: 'object',
+      properties: { foo: { type: 'string' } }
+    })
+  })
 })
