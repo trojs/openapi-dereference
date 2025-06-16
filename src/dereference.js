@@ -48,7 +48,7 @@ export const dereferenceSync = (schema) => {
         }
 
         for (const key in current) {
-          if (!['__proto__', 'constructor', 'prototype'].includes(key)) {
+          if (!PROHIBITED_KEYS.has(key)) {
             current[key] = resolve(current[key], `${path}/${key}`)
           }
         }
