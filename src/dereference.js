@@ -9,6 +9,7 @@ import { resolveRefSync } from './resolveRef.js'
  * @typedef {import('./types').DereferencedJSONSchema} DereferencedJSONSchema
  */
 
+const PROHIBITED_KEYS = ['__proto__', 'constructor', 'prototype']
 const cache = new Map()
 
 /**
@@ -48,7 +49,7 @@ export const dereferenceSync = (schema) => {
         }
 
         for (const key in current) {
-          if (!PROHIBITED_KEYS.has(key)) {
+          if (!PROHIBITED_KEYS.includes(key)) {
             current[key] = resolve(current[key], `${path}/${key}`)
           }
         }
