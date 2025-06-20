@@ -28,7 +28,7 @@
     "main": "src/index.js",
     "types": "src/types.d.ts",
     "devDependencies": {
-        "@trojs/lint": "^0.2.13",
+        "@trojs/lint": "^0.3.0",
         "eslint": "^9.15.0",
         "globals": "^16.0.0",
         "jscpd": "^4.0.0",
