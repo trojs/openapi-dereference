@@ -12,6 +12,7 @@
         "lint:report": "eslint src/*.js -f json -o report.json",
         "lint:fix": "eslint --fix",
         "lint:rules": "eslint --print-config file.js > eslintconfig.json",
+        "lint:types": "tsc --noEmit --project tsconfig.json --skipLibCheck",
         "test": "node --test --experimental-test-coverage --test-reporter=spec --test-reporter=lcov --test-reporter-destination=stdout --test-reporter-destination=./coverage/lcov.info",
         "test:watch": "node --watch --test --experimental-test-coverage --test-reporter=spec --test-reporter=lcov --test-reporter-destination=stdout --test-reporter-destination=./coverage/lcov.info",
         "cpd": "node_modules/jscpd/bin/jscpd src",
@@ -26,13 +27,17 @@
         "src/types.d.ts"
     ],
     "main": "src/index.js",
+    "source": "src/index.js",
+    "module": "src/index.js",
     "types": "src/types.d.ts",
     "devDependencies": {
         "@trojs/lint": "^0.3.0",
+        "@types/node": "^24.9.2",
         "eslint": "^9.15.0",
         "globals": "^16.0.0",
         "jscpd": "^4.0.0",
-        "json-schema": "^0.4.0"
+        "json-schema": "^0.4.0",
+        "typescript": "^5.9.3"
     },
     "repository": {
         "type": "git",
