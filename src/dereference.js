@@ -54,7 +54,7 @@ export const dereferenceSync = (schema) => {
     // Handle arrays (register before descending)
     if (Array.isArray(current)) {
       const arr = new Array(current.length)
-      // @ts-expect-error
+      // @ts-expect-error WeakMap type
       seen.set(current, arr)
       for (let i = 0; i < current.length; i++) {
         arr[i] = resolve(current[i], `${path}/${i}`)
