@@ -1,9 +1,11 @@
+/* eslint sonarjs/cognitive-complexity: ["error", 19] */
 import { klona } from './klona.js'
 import { resolveRefSync } from './resolveRef.js'
 
 /**
- * @typedef {import('./types').JSONSchema} JSONSchema
- * @typedef {import('./types').DereferencedJSONSchema} DereferencedJSONSchema
+ * @typedef {import('./types.d.ts').JSONSchema} JSONSchema
+ * @typedef {import('./types.d.ts').DereferencedJSONSchema} DereferencedJSONSchema
+ * @typedef {WeakMap<{[key: string]: string}, any>} WeakMapRefAny
  */
 
 const PROHIBITED_KEYS = new Set(['__proto__', 'constructor', 'prototype'])
@@ -35,6 +37,7 @@ export const dereferenceSync = (schema) => {
     : schema
 
   const cloned = klona(filtered)
+  /** @type {WeakMapRefAny} */
   const seen = new WeakMap()
 
   /**
@@ -49,10 +52,14 @@ export const dereferenceSync = (schema) => {
     // Handle circular references
     if (seen.has(current)) return seen.get(current)
 
-    // Handle arrays
+    // Handle arrays (register before descending)
     if (Array.isArray(current)) {
-      const arr = current.map((item, i) => resolve(item, `${path}/${i}`))
+      const arr = new Array(current.length)
+      // @ts-expect-error
       seen.set(current, arr)
+      for (let i = 0; i < current.length; i++) {
+        arr[i] = resolve(current[i], `${path}/${i}`)
+      }
       return arr
     }
 
@@ -62,28 +69,25 @@ export const dereferenceSync = (schema) => {
       if (!ref) {
         return null
       }
-      if (seen.has(ref)) {
-        return seen.get(ref)
+      if (typeof ref === 'object' && ref !== null) {
+        // If we've already started resolving this target, reuse it
+        // @ts-expect-error WeakMap type
+        if (seen.has(ref)) {
+          // @ts-expect-error WeakMap type
+          return seen.get(ref)
+        }
       }
-      if (Array.isArray(ref)) {
-        const resolvedArray = resolve(ref, current.$ref)
-        seen.set(ref, resolvedArray)
-        return resolvedArray
-      }
-      const placeholder = {}
-      seen.set(current, placeholder)
-      const resolved = resolve(ref, current.$ref)
-      Object.assign(placeholder, resolved)
-      return resolved
+      // Resolve the referenced value (object/array/primitive)
+      return resolve(ref, current.$ref)
     }
 
-    // Handle objects
-    const obj = Object.fromEntries(
-      Object.entries(current)
-        .filter(([key]) => !PROHIBITED_KEYS.has(key))
-        .map(([key, value]) => [key, resolve(value, `${path}/${key}`)])
-    )
+    // Handle objects (register before descending)
+    const obj = {}
     seen.set(current, obj)
+    for (const [key, value] of Object.entries(current)) {
+      if (PROHIBITED_KEYS.has(key)) continue
+      obj[key] = resolve(value, `${path}/${key}`)
+    }
     return obj
   }
 

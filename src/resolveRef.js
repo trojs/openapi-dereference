@@ -1,6 +1,6 @@
 /**
- * @typedef {import('./types').JSONSchema} JSONSchema
- * @typedef {import('./types').DereferencedJSONSchema} DereferencedJSONSchema
+ * @typedef {import('./types.d.ts').JSONSchema} JSONSchema
+ * @typedef {import('./types.d.ts').DereferencedJSONSchema} DereferencedJSONSchema
  */
 
 const cache = new Map()

@@ -4,8 +4,8 @@ import assert from 'node:assert'
 import { dereferenceSync } from './dereference.js'
 
 /**
- * @typedef {import('./types').JSONSchema} JSONSchema
- * @typedef {import('./types').DereferencedJSONSchema} DereferencedJSONSchema
+ * @typedef {import('./types.d.ts').JSONSchema} JSONSchema
+ * @typedef {import('./types.d.ts').DereferencedJSONSchema} DereferencedJSONSchema
  */
 
 test('dereferenceSync', async (t) => {
@@ -330,9 +330,12 @@ test('dereferenceSync', async (t) => {
   })
 
   await t.test('should handle primitive values', async () => {
+    // @ts-ignore
     assert.strictEqual(dereferenceSync('string'), 'string')
+    // @ts-ignore
     assert.strictEqual(dereferenceSync(42), 42)
     assert.strictEqual(dereferenceSync(null), null)
+    // @ts-ignore
     assert.strictEqual(dereferenceSync(true), true)
   })
 
@@ -342,15 +345,15 @@ test('dereferenceSync', async (t) => {
       arr: [{ type: 'string' }, { type: 'number' }]
     }
     const result = dereferenceSync(schema)
+
+    const shared = [
+      { type: 'string' },
+      { type: 'number' }
+    ]
+
     assert.deepEqual(result, {
-      root: [
-        { type: 'string' },
-        { type: 'number' }
-      ],
-      arr: [
-        { type: 'string' },
-        { type: 'number' }
-      ]
+      root: shared,
+      arr: shared
     })
   })
 
