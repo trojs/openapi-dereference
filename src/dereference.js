@@ -69,13 +69,10 @@ export const dereferenceSync = (schema) => {
       if (!ref) {
         return null
       }
-      if (typeof ref === 'object' && ref !== null) {
-        // If we've already started resolving this target, reuse it
+      // @ts-expect-error WeakMap type
+      if (typeof ref === 'object' && ref !== null && seen.has(ref)) {
         // @ts-expect-error WeakMap type
-        if (seen.has(ref)) {
-          // @ts-expect-error WeakMap type
-          return seen.get(ref)
-        }
+        return seen.get(ref)
       }
       // Resolve the referenced value (object/array/primitive)
       return resolve(ref, current.$ref)
