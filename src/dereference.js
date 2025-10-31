@@ -1,4 +1,3 @@
-/* eslint sonarjs/cognitive-complexity: ["error", 19] */
 import { klona } from './klona.js'
 import { resolveRefSync } from './resolveRef.js'
 
