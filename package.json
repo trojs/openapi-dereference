@@ -33,7 +33,7 @@
     "devDependencies": {
         "@trojs/lint": "^0.4.0",
         "@types/node": "^24.9.2",
-        "eslint": "^9.15.0",
+        "eslint": "^10.0.0",
         "globals": "^17.0.0",
         "jscpd": "^4.0.0",
         "json-schema": "^0.4.0",
