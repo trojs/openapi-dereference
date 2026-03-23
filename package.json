@@ -37,7 +37,7 @@
         "globals": "^17.0.0",
         "jscpd": "^4.0.0",
         "json-schema": "^0.4.0",
-        "typescript": "^5.9.3"
+        "typescript": "^6.0.0"
     },
     "repository": {
         "type": "git",
